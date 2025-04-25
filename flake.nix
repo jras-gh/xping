@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs }: rec {
     packages.x86_64-linux.default = with import nixpkgs { system = "x86_64-linux"; };
     stdenv.mkDerivation {
       name = "xping";
@@ -22,5 +22,7 @@
         ln -f $out/man8/xping.8.gz $out/man8/xping-http.8.gz
       '';
     };
+
+    packages.x86_64-linux.xping = packages.x86_64-linux.default;
   };
 }
